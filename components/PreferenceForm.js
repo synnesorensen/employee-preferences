@@ -1,15 +1,18 @@
 import { useState } from "react"
 import styles from "../styles/Home.module.css"
 import { useForm } from "react-hook-form"
+import styled from "styled-components"
 
 export default function PreferenceForm({ allergies, diets }) {
   const [formData, setFormData] = useState()
-  const { register, handleSubmit, formState } = useForm({ mode: "onChange" })
+  const { register, handleSubmit, reset, formState } = useForm({
+    mode: "onChange"
+  })
 
   const onSubmit = async (data) => {
     setFormData(data)
     try {
-      let response = await fetch("./api/createPreference", {
+      await fetch("./api/createPreference", {
         method: "POST",
         body: JSON.stringify(data),
         type: "application/json"
@@ -17,6 +20,7 @@ export default function PreferenceForm({ allergies, diets }) {
     } catch (err) {
       console.log("An error occurred: ", err)
     }
+    reset()
   }
 
   return (
@@ -25,7 +29,7 @@ export default function PreferenceForm({ allergies, diets }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.div}>
           <label>Oppgi ditt navn: </label>
-          <input
+          <NameInput
             className={styles.formInput}
             type="text"
             {...register("name", { required: true })}
@@ -80,7 +84,7 @@ export default function PreferenceForm({ allergies, diets }) {
         </div>
         <div className={styles.div}>
           <label>Eventuelle kommentarer: </label>
-          <input
+          <CommentInput
             className={styles.formInput}
             type="text"
             {...register("comment")}
@@ -104,3 +108,33 @@ export default function PreferenceForm({ allergies, diets }) {
     </div>
   )
 }
+
+const NameInput = styled.input`
+  border: 1px solid rgba(252, 252, 252, 0.4);
+  background-color: rgba(252, 252, 252, 0.2);
+  width: 250px;
+  border-radius: 3px;
+  font-family: "Source Sans Pro", sans-serif;
+  padding: 8px 10px;
+  margin-top: 10px;
+  display: block;
+  text-align: left;
+  font-size: 16px;
+  color: white;
+  font-weight: 200;
+`
+
+const CommentInput = styled.input`
+  border: 1px solid rgba(252, 252, 252, 0.4);
+  background-color: rgba(252, 252, 252, 0.2);
+  width: 350px;
+  border-radius: 3px;
+  font-family: "Source Sans Pro", sans-serif;
+  padding: 8px 10px;
+  margin-top: 10px;
+  display: block;
+  text-align: left;
+  font-size: 16px;
+  color: white;
+  font-weight: 200;
+`

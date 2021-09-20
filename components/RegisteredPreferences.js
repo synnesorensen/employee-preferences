@@ -46,12 +46,9 @@ export default function RegisteredPreferences() {
 
 const Persons = styled.div`
   overflow-y: scroll;
-  border: 0.5px solid #eaeaea;
   border-radius: 4px;
   > div {
     padding: 12px;
-    border: 0.5px solid #eaeaea;
-  }
 `
 
 const StyledPerson = styled.div`
