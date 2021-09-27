@@ -25,18 +25,14 @@ export default function RegisteredPreferences() {
       <Persons>
         {data?.map((d) => (
           <StyledPerson>
-            <StyledRadio
+            <StyledList
               id={d._id}
-              type="radio"
-              name="prefRadio"
-              value={d._id}
+              value={d.slug}
               key={d._id}
             />
-            <Link key={d._id} href={`person/${d.slug.current}`}>
-              <a>
-                <span>{d.name}</span>
-              </a>
-            </Link>
+              <StyledA href={`person/${d.slug.current}`}>
+                {d.name}
+              </StyledA>
           </StyledPerson>
         ))}
       </Persons>
@@ -61,10 +57,17 @@ const StyledPerson = styled.div`
     background-color: rgba(252, 252, 252, 0.2);
   }
   cursor: pointer;
+  display: block;
 `
 
-const StyledRadio = styled.input.attrs({
+const StyledList = styled.li.attrs({
   type: "text"
 })`
   display: none;
+`
+
+const StyledA = styled.a`
+  display: block;
+  width: 100%;
+  height: 100%;
 `
