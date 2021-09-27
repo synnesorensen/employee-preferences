@@ -12,7 +12,7 @@ const config = {
 const client = sanityClient(config)
 
 export default async function createPreference(req, res) {
-  const { name, allergy, diet, comment } = JSON.parse(req.body)
+  const { name, allergy, diet, comment, slug } = JSON.parse(req.body)
   try {
     await client.create({
       _type: "preference",
@@ -21,14 +21,18 @@ export default async function createPreference(req, res) {
         return {
           _type: "reference",
           _ref: a,
-          _key: uuidv4(),
+          _key: uuidv4()
         }
       }),
       diet: {
         _type: "reference",
-        _ref: diet,
+        _ref: diet
       },
       comment,
+      slug: {
+        _type: "slug",
+        current: slug
+      }
     })
   } catch (err) {
     console.error(err)

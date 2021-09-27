@@ -2,15 +2,22 @@ import { useState } from "react"
 import styles from "../styles/Home.module.css"
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
+import { getAllergies, getDiets } from "../lib/api"
 
 export default function PreferenceForm({ allergies, diets }) {
   const [formData, setFormData] = useState()
   const { register, handleSubmit, reset, formState } = useForm({
-    mode: "onChange"
+    mode: "onChange",
+    shouldUnregister: false
   })
 
   const onSubmit = async (data) => {
+    console.log(data)
     setFormData(data)
+    data.slug = data.name.replace(/["]+/g, '').replace(/\s+/g, '-').toLowerCase()
+    if (!data.allergy) {
+      data.allergy = []     // TODO: Find a better way to solve this issue. 
+    }
     try {
       await fetch("./api/createPreference", {
         method: "POST",
@@ -138,3 +145,10 @@ const CommentInput = styled.input`
   color: white;
   font-weight: 200;
 `
+
+export async function getStaticProps() {
+  const allergies = await getAllergies()
+  const diets = await getDiets()
+
+  return { props: { allergies, diets } }
+}

@@ -1,27 +1,31 @@
 import React, { useState } from "react"
-import { Layout, LayoutItem } from "@staccx/bento"
-import PreferenceForm from "../components/PreferenceForm"
-import { getAllergies, getAllRegisteredPreferences, getDiets } from "../lib/api"
+import Link from "next/link"
 import RegisteredPreferences from "../components/RegisteredPreferences"
 import styles from "../styles/Home.module.css"
 
-export default function Home({ allergies, diets }) {
-  const [showModal, setShowModal] = useState(false)
+export default function Home() {
 
   return (
     <>
       <title>Ansattinfo</title>
-      <div className={styles.main}>
-        <RegisteredPreferences />
-        <PreferenceForm allergies={allergies} diets={diets} />
+      <div className={styles.container}>
+        <h1>Registrering av opplysninger</h1>
+        <div className={styles.wrapper}>
+          <div className={styles.one}>
+          <RegisteredPreferences />
+          </div>
+          <div className={styles.two}>
+            <p>Hvis du ikke ser navnet ditt i listen kan du registrer deg ved å trykke på knappen.</p>
+            <Link href="/form">
+              <button type="button" className={styles.button}>
+                Registrer
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
     </>
   )
 }
 
-export async function getStaticProps() {
-  const allergies = await getAllergies()
-  const diets = await getDiets()
 
-  return { props: { allergies, diets } }
-}
