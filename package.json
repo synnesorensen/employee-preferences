@@ -9,18 +9,28 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sanity/types": "^2.19.0",
     "@staccx/bento": "^13.5.9",
+    "@types/node": "^16.10.1",
+    "@types/styled-components": "^5.1.14",
+    "@types/uuid": "^8.3.1",
     "next": "11.1.2",
     "next-sanity": "^0.4.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.15.3",
+    "react-router-dom": "^5.3.0",
     "react-select": "^4.3.1",
     "styled-components": "^5.3.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/react": "^17.0.24",
+    "@types/react-dom": "^17.0.9",
+    "awesome-typescript-loader": "^5.2.1",
     "eslint": "7.32.0",
-    "eslint-config-next": "11.1.2"
+    "eslint-config-next": "11.1.2",
+    "source-map-loader": "^3.0.0",
+    "typescript": "^3.9.10"
   }
 }

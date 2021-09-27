@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { getAllRegisteredPreferences } from "../lib/api"
-import Link from "next/link"
+import { Preference } from "../interfaces"
 import styled from "styled-components"
 import styles from "../styles/Home.module.css"
 
 export default function RegisteredPreferences() {
-  const [data, setData] = useState([])
+  const initial: Preference[] = []
+  const [data, setData] = useState(initial)
   const fetchPersons = async () => {
     try {
-      const response = await getAllRegisteredPreferences()
+      const response: Preference[] = await getAllRegisteredPreferences()
       setData(response)
     } catch (err) {
       console.log("Something went wrong: ", err)
@@ -24,13 +25,13 @@ export default function RegisteredPreferences() {
       <h1>Registrerte personer</h1>
       <Persons>
         {data?.map((d) => (
-          <StyledPerson>
+          <StyledPerson key={d._id}>
             <StyledList
               id={d._id}
-              value={d.slug}
+              value={d.slug.current}
               key={d._id}
             />
-              <StyledA href={`person/${d.slug.current}`}>
+              <StyledA href={`person/${d.slug.current}`} key={d._id}>
                 {d.name}
               </StyledA>
           </StyledPerson>

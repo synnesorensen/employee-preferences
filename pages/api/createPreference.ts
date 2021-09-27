@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid"
 import sanityClient from "@sanity/client"
+import { Allergy } from "../../interfaces"
 
 const config = {
   projectId: process.env.SANITY_PROJECT_ID,
@@ -11,13 +12,14 @@ const config = {
 
 const client = sanityClient(config)
 
-export default async function createPreference(req, res) {
+export default async function createPreference(req: any, res: any) {
+  console.dir(req)
   const { name, allergy, diet, comment, slug } = JSON.parse(req.body)
   try {
     await client.create({
       _type: "preference",
       name,
-      allergy: allergy.map((a) => {
+      allergy: allergy.map((a: Allergy) => {
         return {
           _type: "reference",
           _ref: a,

@@ -1,8 +1,6 @@
 import {
   sanityClient,
-  urlFor,
   usePreviewSubscription,
-  PortableText
 } from "../../lib/sanity"
 import styles from "../../styles/Home.module.css"
 

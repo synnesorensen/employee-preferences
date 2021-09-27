@@ -3,6 +3,7 @@ import styles from "../styles/Home.module.css"
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
 import { getAllergies, getDiets } from "../lib/api"
+import { v4 as uuidv4 } from "uuid"
 
 export default function PreferenceForm({ allergies, diets }) {
   const [formData, setFormData] = useState()
@@ -12,9 +13,8 @@ export default function PreferenceForm({ allergies, diets }) {
   })
 
   const onSubmit = async (data) => {
-    console.log(data)
     setFormData(data)
-    data.slug = data.name.replace(/["]+/g, '').replace(/\s+/g, '-').toLowerCase()
+    data.slug = uuidv4()
     if (!data.allergy) {
       data.allergy = []     // TODO: Find a better way to solve this issue. 
     }
