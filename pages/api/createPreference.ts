@@ -13,7 +13,6 @@ const config = {
 const client = sanityClient(config)
 
 export default async function createPreference(req: any, res: any) {
-  console.dir(req)
   const { name, allergy, diet, comment, slug } = JSON.parse(req.body)
   try {
     await client.create({
@@ -38,7 +37,7 @@ export default async function createPreference(req: any, res: any) {
     })
   } catch (err) {
     console.error(err)
-    return res.status(500).json({ message: `Could not sumit preference`, err })
+    return res.status(500).json({ message: `Could not submit preference`, err })
   }
   return res.status(200).json({ message: `Preference submitted` })
 }

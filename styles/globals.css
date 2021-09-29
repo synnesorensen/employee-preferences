@@ -16,3 +16,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+input:not(:last-child) { 
+  margin-bottom: 12px;  
+}
