@@ -1,6 +1,6 @@
 export default {
   name: "allergy",
-  title: "Allergi",
+  title: "Allergier",
   type: "document",
   fields: [
     {

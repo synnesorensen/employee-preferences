@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react"
-import { getAllRegisteredPreferences } from "../lib/api"
-import { Preference } from "../interfaces"
+import { getAllRegisteredPersons } from "../lib/api"
+import { Person } from "../interfaces"
 import styled from "styled-components"
 import styles from "../styles/Home.module.css"
 
-export default function RegisteredPreferences() {
-  const initial: Preference[] = []
+export default function RegisteredPersons() {
+  const initial: Person[] = []
   const [data, setData] = useState(initial)
   const fetchPersons = async () => {
     try {
-      const response: Preference[] = await getAllRegisteredPreferences()
+      const response: Person[] = await getAllRegisteredPersons()
       setData(response)
     } catch (err) {
       console.log("Something went wrong: ", err)

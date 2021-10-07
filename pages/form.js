@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css"
 import { getAllergies, getDiets } from "../lib/api"
 import { v4 as uuidv4 } from "uuid"
 
-export default function PreferenceForm({ allergies, diets }) {
+export default function Form({ allergies, diets }) {
   const [formData, setFormData] = useState()
   const { register, handleSubmit, reset, formState } = useForm({
     mode: "onChange",
@@ -20,7 +20,7 @@ export default function PreferenceForm({ allergies, diets }) {
       data.allergy = []     // TODO: Find a better way to solve this issue? 
     }
     try {
-      await fetch("./api/createPreference", {
+      await fetch("./api/createPerson", {
         method: "POST",
         body: JSON.stringify(data),
         type: "application/json"

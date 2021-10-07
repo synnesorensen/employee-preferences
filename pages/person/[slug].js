@@ -1,10 +1,11 @@
+import person from "../../ep-studio/schemas/person"
 import {
   sanityClient,
   usePreviewSubscription,
 } from "../../lib/sanity"
 import styles from "../../styles/Home.module.css"
 
-const query = `*[_type == "preference" && slug.current == $slug][0] {
+const query = `*[_type == "person" && slug.current == $slug][0] {
   _id, 
   name,
   slug,
@@ -13,25 +14,25 @@ const query = `*[_type == "preference" && slug.current == $slug][0] {
   allergy[]->{name}
 }`
 
-export default function OnePreference({ data, preview }) {
-  const { data: preference } = usePreviewSubscription(query, {
-    params: { slug: data.preference?.slug.current },
+export default function OnePerson({ data, preview }) {
+  const { data: person } = usePreviewSubscription(query, {
+    params: { slug: data.person?.slug.current },
     initialData: data,
     enabled: preview
   })
 
   return (
     <div className={styles.card}>
-      <h1>Preferanser for {preference.name}</h1>
+      <h1>Opplysninger for {person.name}</h1>
       <div>
         <p>Allergier </p>
         <ul>
-          {preference.allergy?.map((a, i) => (
+          {person.allergy?.map((a, i) => (
             <li key={i}>{a?.name}</li>
           ))}
         </ul>
-        <p>Diett: {preference.diet}</p>
-        <p>Kommentarer: {preference.comment}</p>
+        <p>Diett: {person.diet}</p>
+        <p>Kommentarer: {person.comment}</p>
       </div>
       <div>
         <button className={styles.button}>Endre</button>
@@ -42,7 +43,7 @@ export default function OnePreference({ data, preview }) {
 
 export async function getStaticPaths() {
   const paths = await sanityClient.fetch(
-    `*[_type == "preference" && defined(slug.current)] {
+    `*[_type == "person" && defined(slug.current)] {
       "params": {
         "slug": slug.current
       }
@@ -56,6 +57,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const { slug } = params
-  const preference = await sanityClient.fetch(query, { slug })
-  return { props: { data: { preference }, preview: true } }
+  const person = await sanityClient.fetch(query, { slug })
+  return { props: { data: { person }, preview: true } }
 }

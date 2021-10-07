@@ -3,7 +3,7 @@ import createSchema from 'part:@sanity/base/schema-creator';
 
 // Then import schema types from any plugins that might expose them
 import schemaTypes from 'all:part:@sanity/base/schema-type';
-import preference from './preference';
+import person from './person';
 import allergy from './allergy';
 import diet from './diet';
 
@@ -15,7 +15,7 @@ export default createSchema({
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
     /* Your types here! */
-    preference, 
+    person, 
     allergy,
     diet
   ]),

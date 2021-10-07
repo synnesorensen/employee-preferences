@@ -1,4 +1,4 @@
-export interface Preference {
+export interface Person {
   _id: string,
   name: string,
   slug: Slug,

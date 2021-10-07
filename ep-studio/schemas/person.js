@@ -1,6 +1,6 @@
 export default {
-  name: "preference",
-  title: "Opplysninger",
+  name: "person",
+  title: "Personlige opplysninger",
   type: "document",
   fields: [
     {
