@@ -3,7 +3,7 @@ import sanityClient from "@sanity/client"
 import { Allergy } from "../../interfaces"
 
 const config = {
-  projectId: process.env.SANITY_PROJECT_ID,
+  projectId: "8duvt6tu",
   dataset: "production",
   apiVersion: "2021-09-01",
   useCdn: false,
