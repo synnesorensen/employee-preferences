@@ -99,25 +99,25 @@ export default function PreferenceForm({ allergies, diets }) {
               {...register("comment")}
             />
           </div>
+          {!formState.isValid &&
+            <div className={styles.comment}>
+              <em>Du må fylle ut navn og velge diett.</em>
+              <br />
+            </div>
+          }
           <Link href="/">
             <button type="button" className={styles.button}>
               Tilbake
             </button>
           </Link>
-          {formState.isValid ? (
-            <button
-              className={styles.button}
-              disabled={!formState.isValid}
-              type="submit"
-            >
-              Lagre
-            </button>
-          ) : (
-            <div className={styles.comment}>
-              <em>Du må fylle ut alle obligatorisk felt.</em>
-              <br />
-            </div>
-          )}
+          <button
+            className={styles.button}
+            disabled={!formState.isValid}
+            type="submit"
+          >
+            Lagre
+          </button>
+          
         </form>
       </div>
     </>
@@ -148,6 +148,7 @@ const CommentInput = styled.input`
   font-family: "Source Sans Pro", sans-serif;
   padding: 8px 10px;
   margin-top: 10px;
+  margin-bottom: 10px;
   display: block;
   text-align: left;
   font-size: 16px;
