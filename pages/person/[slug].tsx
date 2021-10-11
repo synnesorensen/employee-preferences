@@ -5,6 +5,7 @@ import {
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { Allergy, Params, Person } from "..//../interfaces"
 import styles from "../../styles/Home.module.css"
+import { CLIEngine } from "eslint"
 
 const query = `*[_type == "person" && slug.current == $slug][0] {
   _id, 
@@ -15,10 +16,9 @@ const query = `*[_type == "person" && slug.current == $slug][0] {
   allergy[]->{name}
 }`
 
-export default function OnePerson({ data } : { data: any }, preview: boolean) {   // TODO: Erstatte any med Person uten at slug knekker
-  console.dir(data)
+export default function OnePerson({ data } : { data: Person }, preview: boolean) {
   const { data: person } = usePreviewSubscription(query, {
-    params: { slug: data.person?.slug.current },
+    params: { slug: data.slug.current },
     initialData: data,
     enabled: preview
   })
@@ -61,5 +61,5 @@ export const getStaticProps: GetStaticProps = async(context) => {
   const params = context.params as Params
   const { slug } = params
   const person = await sanityClient.fetch(query, { slug } )
-  return { props: { data: { person }, preview: true } }
+  return { props: { data: person, preview: true } }
 }
