@@ -5,7 +5,7 @@ import {
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { Allergy, Params, Person } from "..//../interfaces"
 import styles from "../../styles/Home.module.css"
-import { CLIEngine } from "eslint"
+import Link from "next/link"
 
 const query = `*[_type == "person" && slug.current == $slug][0] {
   _id, 
@@ -24,21 +24,37 @@ export default function OnePerson({ data } : { data: Person }, preview: boolean)
   })
 
   return (
-    <div className={styles.card}>
-      <h1>Opplysninger for {person.name}</h1>
-      <div>
-        <p>Allergier </p>
-        <ul>
-          {person.allergy?.map((a: Allergy, i: number) => (
-            <li key={i}>{a?.name}</li>
-          ))}
-        </ul>
-        <p>Diett: {person.diet}</p>
-        <p>Kommentarer: {person.comment}</p>
+    <div className={styles.wrapper}>
+      <div className={styles.one}>
+        <div className={styles.card}>
+          <h1>Opplysninger for {person.name}</h1>
+          <div>
+            <p>Allergier </p>
+            <ul>
+              {person.allergy?.map((a: Allergy, i: number) => (
+                <li key={i}>{a?.name}</li>
+              ))}
+            </ul>
+            <p>Diett</p>
+            <ul>
+              <li>{person.diet}</li>
+            </ul>
+            <p>Kommentarer:</p>
+            <ul>
+              <li>{person.comment}</li>
+            </ul>
+          </div>
+          <div>
+            <button className={styles.button}>Endre</button>
+            <Link href="/">
+              <button type="button" className={styles.button}>
+                Tilbake
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
-      <div>
-        <button className={styles.button}>Endre</button>
-      </div>
+      <div className={styles.two}></div>
     </div>
   )
 }

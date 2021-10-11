@@ -15,7 +15,7 @@ export default function Home() {
           <RegisteredPersons />
           </div>
           <div className={styles.two}>
-            <p>Hvis du ikke ser navnet ditt i listen kan du registrer deg ved å trykke på knappen.</p>
+            <p>Hvis du ikke ser navnet ditt i listen kan du registrere deg ved å trykke på knappen.</p>
             <Link href="/form">
               <button type="button" className={styles.button}>
                 Registrer
