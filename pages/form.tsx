@@ -57,7 +57,7 @@ export default function Form({ allergies, diets } : { allergies: Allergy[], diet
           </div>
           <br />
           <div>
-            <label>Velg allergier:</label>
+            <p>Velg allergier:</p>
             {allergies ? (
               <ul>
                 {allergies.map((allergy) => (
@@ -78,7 +78,7 @@ export default function Form({ allergies, diets } : { allergies: Allergy[], diet
             )}
           </div>
           <div>
-            <label>Velg diett:</label>
+            <p>Velg diett:</p>
             {diets ? (
               <ul>
                 {diets.map((diet) => (
