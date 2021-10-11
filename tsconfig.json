@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "ep-studio/schemas/schema.js", "ep-studio/schemas/diet.js", "ep-studio/schemas/person.js", "ep-studio/schemas/allergy.js"  ],
   "exclude": [
     "node_modules"
   ]
