@@ -5,15 +5,16 @@ import styled from "styled-components"
 import styles from "../styles/Home.module.css"
 import { getAllergies, getDiets } from "../lib/api"
 import { v4 as uuidv4 } from "uuid"
+import { Allergy, Diet } from "../interfaces"
 
-export default function Form({ allergies, diets }) {
+export default function Form({ allergies, diets } : { allergies: Allergy[], diets: Diet[] }) {
   const [formData, setFormData] = useState()
   const { register, handleSubmit, reset, formState } = useForm({
     mode: "onChange",
     shouldUnregister: false
   })
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     setFormData(data)
     data.slug = uuidv4()
     if (!data.allergy) {
@@ -22,8 +23,10 @@ export default function Form({ allergies, diets }) {
     try {
       await fetch("./api/createPerson", {
         method: "POST",
-        body: JSON.stringify(data),
-        type: "application/json"
+        headers: {
+          'content-type': 'application/json;charset=UTF-8',
+        },
+        body: JSON.stringify(data)
       })
     } catch (err) {
       console.log("An error occurred: ", err)
@@ -54,9 +57,7 @@ export default function Form({ allergies, diets }) {
                     <input
                       key={allergy._id}
                       type="checkbox"
-                      name={allergy.name}
                       value={allergy._id}
-                      checked={allergy[allergy.name]}
                       {...register("allergy")}
                     />
                     {allergy.name}
@@ -78,7 +79,6 @@ export default function Form({ allergies, diets }) {
                       key={diet._id}
                       id={diet._id}
                       type="radio"
-                      name="dietSelect"
                       value={diet._id}
                       {...register("diet", { required: true })}
                     />

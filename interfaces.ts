@@ -1,3 +1,5 @@
+import { ParsedUrlQuery } from "querystring";
+
 export interface Person {
   _id: string,
   name: string,
@@ -20,4 +22,8 @@ export interface Allergy {
 export interface Diet {
   _id: string,
   name: string
+}
+
+export interface Params extends ParsedUrlQuery {
+  slug: string,
 }

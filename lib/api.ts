@@ -1,4 +1,4 @@
-import { sanityClient } from "../lib/sanity"
+import { sanityClient } from "./sanity"
 
 export async function getAllRegisteredPersons() {
   const res = await fetch(
@@ -17,5 +17,3 @@ export async function getDiets() {
   const result = await sanityClient.fetch(`*[_type == "diet"] {_id, name}`)
   return result
 }
-
-

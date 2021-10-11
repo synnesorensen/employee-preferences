@@ -13,7 +13,7 @@ const config = {
 const client = sanityClient(config)
 
 export default async function createPerson(req: any, res: any) {
-  const { name, allergy, diet, comment, slug } = JSON.parse(req.body)
+  const { name, allergy, diet, comment, slug } = req.body
   try {
     await client.create({
       _type: "person",
