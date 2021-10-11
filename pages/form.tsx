@@ -8,13 +8,21 @@ import { v4 as uuidv4 } from "uuid"
 import { Allergy, Diet } from "../interfaces"
 
 export default function Form({ allergies, diets } : { allergies: Allergy[], diets: Diet[] }) {
-  const [formData, setFormData] = useState()
+  const [formData, setFormData] = useState<FormValues | null>(null)
   const { register, handleSubmit, reset, formState } = useForm({
     mode: "onChange",
     shouldUnregister: false
   })
 
-  const onSubmit = async (data: any) => {
+  type FormValues = {
+    name: string,
+    allergy: Allergy[],
+    diet: Diet,
+    comment: string, 
+    slug: string
+  }
+
+  const onSubmit = async (data: FormValues) => {
     setFormData(data)
     data.slug = uuidv4()
     if (!data.allergy) {

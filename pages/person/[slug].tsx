@@ -15,7 +15,7 @@ const query = `*[_type == "person" && slug.current == $slug][0] {
   allergy[]->{name}
 }`
 
-export default function OnePerson({ data } : { data: any }, preview: boolean) {   // TODO: sjekke om any kan erstattes?
+export default function OnePerson({ data } : { data: any }, preview: boolean) {   // TODO: Erstatte any med Person uten at slug knekker
   console.dir(data)
   const { data: person } = usePreviewSubscription(query, {
     params: { slug: data.person?.slug.current },
