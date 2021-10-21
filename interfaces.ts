@@ -4,7 +4,7 @@ export interface Person {
   _id: string,
   name: string,
   slug: Slug,
-  allergy: Allergy[],
+  allergy: Allergies,
   diet: Diet, 
   comment: string
 }
@@ -18,6 +18,8 @@ export interface Allergy {
   name: string,
   _key: string
 }
+
+export interface Allergies extends Array<Allergy> { }
 
 export interface Diet {
   _id: string,
