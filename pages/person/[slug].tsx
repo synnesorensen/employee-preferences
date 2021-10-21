@@ -25,27 +25,33 @@ export default function OnePerson({ data } : { data: Person }, preview: boolean)
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.one}>
+      <div className={styles.left}>
         <div className={styles.card}>
           <h1>Opplysninger for {person.name}</h1>
           <div>
-            <p>Allergier </p>
+            <p>Allergier: </p>
             <ul>
-              {person.allergy?.map((a: Allergy, i: number) => (
-                <li key={i}>{a?.name}</li>
-              ))}
+              {person.allergy.length > 0 ? 
+                person.allergy.map((a: Allergy, i: number) => (
+                  <li key={i}>{a?.name}</li>
+                )) : 
+                <p>Ingen registrerte allergier.</p>
+              }
             </ul>
-            <p>Diett</p>
+            <p>Diett:</p>
             <ul>
               <li>{person.diet}</li>
             </ul>
             <p>Kommentarer:</p>
             <ul>
-              <li>{person.comment}</li>
+              {person.comment ? 
+                <em>{person.comment}</em> :
+                <p> — </p>
+              }
             </ul>
           </div>
           <div>
-            <button className={styles.button}>Endre</button>
+            <button className={styles.button}>Endre</button>      {/* TODO: Sende tilbake til /form, men med de registrerte opplysningene */}
             <Link href="/">
               <button type="button" className={styles.button}>
                 Tilbake
@@ -54,7 +60,7 @@ export default function OnePerson({ data } : { data: Person }, preview: boolean)
           </div>
         </div>
       </div>
-      <div className={styles.two}></div>
+      <div className={styles.right}></div>
     </div>
   )
 }

@@ -56,12 +56,12 @@
   font-weight: 200;
 }
 
-.card p {
-  font-size: 1rem;
-  font-weight: 400;
+.centerForm h2 {
+  font-size: 1.1rem;
+  font-weight: 300;
   line-height: 1.5;
   padding: 0;
-  margin: 18px 0 0 0;
+  margin: 18px 0 10px 0;
 }
 
 .button {
@@ -104,14 +104,42 @@
   grid-template-rows: auto;
 }
 
-.one {
+.left {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row: auto;
 }
 
-.two {
+.right {
   grid-column-start: 3;
   grid-column-end: 6;
   grid-row: auto;
+}
+
+.itemA {
+  grid-area: header;
+  justify-self: center;
+}
+.itemB {
+  grid-area: main;
+  justify-self: center;
+}
+.itemC {
+  grid-area: sidebar;
+  justify-self: stretch;
+}
+.itemD {
+  grid-area: footer;
+}
+
+.pageLayout {
+  column-gap: 10px;
+  row-gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "header header header header"
+    "main main sidebar . "
+    "footer footer footer footer";
 }

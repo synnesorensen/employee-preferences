@@ -5,9 +5,9 @@ import styled from "styled-components"
 import styles from "../styles/Home.module.css"
 import { getAllergies, getDiets } from "../lib/api"
 import { v4 as uuidv4 } from "uuid"
-import { Allergy, Diet } from "../interfaces"
+import { Allergies, Diet } from "../interfaces"
 
-export default function Form({ allergies, diets } : { allergies: Allergy[], diets: Diet[] }) {
+export default function Form({ allergies, diets } : { allergies: Allergies, diets: Diet[] }) {
   const [formData, setFormData] = useState<FormValues | null>(null)
   const { register, handleSubmit, reset, formState } = useForm({
     mode: "onChange",
@@ -16,7 +16,7 @@ export default function Form({ allergies, diets } : { allergies: Allergy[], diet
 
   type FormValues = {
     name: string,
-    allergy: Allergy[],
+    allergy: Allergies,
     diet: Diet,
     comment: string, 
     slug: string
@@ -48,7 +48,7 @@ export default function Form({ allergies, diets } : { allergies: Allergy[], diet
         <h1>Registrering av opplysninger</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.comment}>
-            <label>Oppgi ditt navn: </label>
+            <h2>Oppgi ditt navn: </h2>
             <NameInput
               className={styles.formInput}
               type="text"
@@ -57,7 +57,7 @@ export default function Form({ allergies, diets } : { allergies: Allergy[], diet
           </div>
           <br />
           <div>
-            <p>Velg allergier:</p>
+            <h2>Velg allergier:</h2>
             {allergies ? (
               <ul>
                 {allergies.map((allergy) => (
@@ -78,7 +78,7 @@ export default function Form({ allergies, diets } : { allergies: Allergy[], diet
             )}
           </div>
           <div>
-            <p>Velg diett:</p>
+            <h2>Velg diett:</h2>
             {diets ? (
               <ul>
                 {diets.map((diet) => (
