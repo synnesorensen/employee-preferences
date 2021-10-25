@@ -1,46 +1,50 @@
-import { useState } from "react"
-import Link from "next/link"
-import { useForm } from "react-hook-form"
-import styled from "styled-components"
-import styles from "../styles/Home.module.css"
-import { getAllergies, getDiets } from "../lib/api"
-import { v4 as uuidv4 } from "uuid"
-import { Allergies, Diet } from "../interfaces"
+import React from "react";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import styled from "styled-components";
+import styles from "../styles/Home.module.css";
+import { getAllergies, getDiets } from "../lib/api";
+import { v4 as uuidv4 } from "uuid";
+import { Allergies, Diet } from "../interfaces";
 
-export default function Form({ allergies, diets } : { allergies: Allergies, diets: Diet[] }) {
-  const [formData, setFormData] = useState<FormValues | null>(null)
+export default function Form({
+  allergies,
+  diets,
+}: {
+  allergies: Allergies;
+  diets: Diet[];
+}) {
+  type FormValues = {
+    name: string;
+    allergy: Allergies;
+    diet: Diet;
+    comment: string;
+    slug: string;
+  };
+
   const { register, handleSubmit, reset, formState } = useForm({
     mode: "onChange",
-    shouldUnregister: false
-  })
-
-  type FormValues = {
-    name: string,
-    allergy: Allergies,
-    diet: Diet,
-    comment: string, 
-    slug: string
-  }
+    shouldUnregister: false,
+  });
 
   const onSubmit = async (data: FormValues) => {
-    setFormData(data)
-    data.slug = uuidv4()
+    data.slug = uuidv4();
     if (!data.allergy) {
-      data.allergy = []     // TODO: Find a better way to solve this issue? 
+      data.allergy = [];
     }
     try {
       await fetch("./api/createPerson", {
         method: "POST",
         headers: {
-          'content-type': 'application/json;charset=UTF-8',
+          "content-type": "application/json;charset=UTF-8",
         },
-        body: JSON.stringify(data)
-      })
+        body: JSON.stringify(data),
+      });
     } catch (err) {
-      console.log("An error occurred: ", err)
+      console.log("An error occurred: ", err);
     }
-    reset()
-  }
+    reset();
+  };
 
   return (
     <>
@@ -100,19 +104,21 @@ export default function Form({ allergies, diets } : { allergies: Allergies, diet
             )}
           </div>
           <div className={styles.comment}>
-            <label>Allergier som ikke er på listen eller andre kommentarer: </label>
+            <label>
+              Allergi eller diett som ikke er på listen eller andre kommentarer:{" "}
+            </label>
             <CommentInput
               className={styles.formInput}
               type="text"
               {...register("comment")}
             />
           </div>
-          {!formState.isValid &&
+          {!formState.isValid && (
             <div className={styles.comment}>
               <em>Du må fylle ut navn og velge diett.</em>
               <br />
             </div>
-          }
+          )}
           <Link href="/">
             <button type="button" className={styles.button}>
               Tilbake
@@ -125,13 +131,11 @@ export default function Form({ allergies, diets } : { allergies: Allergies, diet
           >
             Lagre
           </button>
-          
         </form>
       </div>
     </>
-  )
+  );
 }
-
 
 const NameInput = styled.input`
   border: 1px solid rgba(252, 252, 252, 0.4);
@@ -146,7 +150,7 @@ const NameInput = styled.input`
   font-size: 16px;
   color: white;
   font-weight: 200;
-`
+`;
 
 const CommentInput = styled.input`
   border: 1px solid rgba(252, 252, 252, 0.4);
@@ -162,11 +166,11 @@ const CommentInput = styled.input`
   font-size: 16px;
   color: white;
   font-weight: 200;
-`
+`;
 
 export async function getStaticProps() {
-  const allergies = await getAllergies()
-  const diets = await getDiets()
+  const allergies = await getAllergies();
+  const diets = await getDiets();
 
-  return { props: { allergies, diets } }
+  return { props: { allergies, diets } };
 }

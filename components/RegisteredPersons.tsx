@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react"
-import { getAllRegisteredPersons } from "../lib/api"
-import { Person } from "../interfaces"
-import styled from "styled-components"
-import styles from "../styles/Home.module.css"
+import React, { useEffect, useState } from "react";
+import { getAllRegisteredPersons } from "../lib/api";
+import { Person } from "../interfaces";
+import styled from "styled-components";
+import styles from "../styles/Home.module.css";
 
 export default function RegisteredPersons() {
-  const initial: Person[] = []
-  const [data, setData] = useState(initial)
+  const initial: Person[] = [];
+  const [data, setData] = useState(initial);
   const fetchPersons = async () => {
     try {
-      const response: Person[] = await getAllRegisteredPersons()
-      setData(response)
+      const response: Person[] = await getAllRegisteredPersons();
+      setData(response);
     } catch (err) {
-      console.log("Something went wrong: ", err)
+      console.log("Something went wrong: ", err);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchPersons()
-  }, [])
+    fetchPersons();
+  }, []);
 
   return (
     <div className={styles.card}>
@@ -26,19 +26,15 @@ export default function RegisteredPersons() {
       <Persons>
         {data?.map((d) => (
           <StyledPerson key={d._id}>
-            <StyledList
-              id={d._id}
-              value={d.slug.current}
-              key={d._id}
-            />
-              <StyledA href={`person/${d.slug.current}`} key={d._id}>
-                {d.name}
-              </StyledA>
+            <StyledList id={d._id} value={d.slug.current} key={d._id} />
+            <StyledA href={`person/${d.slug.current}`} key={d._id}>
+              {d.name}
+            </StyledA>
           </StyledPerson>
         ))}
       </Persons>
     </div>
-  )
+  );
 }
 
 const Persons = styled.div`
@@ -46,7 +42,7 @@ const Persons = styled.div`
   border-radius: 4px;
   > div {
     padding: 12px;
-`
+`;
 
 const StyledPerson = styled.div`
   label {
@@ -59,16 +55,16 @@ const StyledPerson = styled.div`
   }
   cursor: pointer;
   display: block;
-`
+`;
 
 const StyledList = styled.li.attrs({
-  type: "text"
+  type: "text",
 })`
   display: none;
-`
+`;
 
 const StyledA = styled.a`
   display: block;
   width: 100%;
   height: 100%;
-`
+`;

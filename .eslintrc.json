@@ -1,5 +1,14 @@
 {
   "extends": [
-    "next/babel"
-  ]
+    "@staccx", 
+    "plugin:react/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "semi": "off",
+    "@typescript-eslint/semi": "error",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": "off"
+  }
 }

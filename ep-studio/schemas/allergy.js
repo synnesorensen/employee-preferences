@@ -6,7 +6,7 @@ export default {
     {
       name: "name",
       title: "Allergi",
-      type: "string"
+      type: "string",
     },
     {
       name: "descr",
@@ -17,9 +17,9 @@ export default {
           title: "Block",
           type: "block",
           styles: [{ title: "Normal", value: "normal" }],
-          lists: []
-        }
-      ]
-    }
-  ]
-}
+          lists: [],
+        },
+      ],
+    },
+  ],
+};

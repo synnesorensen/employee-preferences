@@ -1,8 +1,18 @@
-import { AppProps } from 'next/app'
-import '../styles/globals.css'
+import React from "react";
+import { AppProps } from "next/app";
+import Head from "next/head";
+import "../styles/globals.css";
+import { ThemeProvider } from "@staccx/bento";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <ThemeProvider>
+      <Component {...pageProps} />
+      <Head>
+        <link rel="shortcut icon" href="/images/favicon.ico" />
+      </Head>
+    </ThemeProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

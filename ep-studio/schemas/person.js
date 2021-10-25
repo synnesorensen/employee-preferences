@@ -7,7 +7,7 @@ export default {
       name: "name",
       title: "Name",
       type: "string",
-      validation: (Rule) => Rule.required()
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "slug",
@@ -15,8 +15,8 @@ export default {
       type: "slug",
       options: {
         source: "name",
-        maxLength: 96
-      }
+        maxLength: 96,
+      },
     },
     {
       name: "allergy",
@@ -25,20 +25,20 @@ export default {
       of: [
         {
           type: "reference",
-          to: [{ type: "allergy" }]
-        }
-      ]
+          to: [{ type: "allergy" }],
+        },
+      ],
     },
     {
       name: "diet",
       title: "Diett",
       type: "reference",
-      to: { type: "diet" }
+      to: { type: "diet" },
     },
     {
       name: "comment",
       title: "Eventuelle kommentarer",
-      type: "text"
-    }
-  ]
-}
+      type: "text",
+    },
+  ],
+};

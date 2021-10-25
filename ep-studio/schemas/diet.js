@@ -6,8 +6,8 @@ export default {
     {
       name: "name",
       title: "Diett",
-      type: "string"
-    }, 
+      type: "string",
+    },
     {
       name: "descr",
       title: "Beskrivelse",
@@ -17,9 +17,9 @@ export default {
           title: "Block",
           type: "block",
           styles: [{ title: "Normal", value: "normal" }],
-          lists: []
-        }
-      ]
-    }
-  ]
-}
+          lists: [],
+        },
+      ],
+    },
+  ],
+};
